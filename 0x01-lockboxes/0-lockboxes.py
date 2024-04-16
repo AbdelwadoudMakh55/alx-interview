@@ -15,11 +15,10 @@ def canUnlockAll(boxes):
         u = queue.pop(0)
         for i in range(len(boxes[u])):
             v = boxes[u][i]
-            if v < len(boxes):
-                if bfsInfo[v]["distance"] is None:
-                    bfsInfo[v]["distance"] = bfsInfo[u]["distance"] + 1
-                    bfsInfo[v]["predecessor"] = u
-                    queue.append(v)
+            if v < len(boxes) and bfsInfo[v]["distance"] is None:
+                bfsInfo[v]["distance"] = bfsInfo[u]["distance"] + 1
+                bfsInfo[v]["predecessor"] = u
+                queue.append(v)
     for i in range(len(bfsInfo)):
         if bfsInfo[i]["distance"] is None:
             return False
