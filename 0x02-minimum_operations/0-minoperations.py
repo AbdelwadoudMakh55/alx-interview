@@ -16,6 +16,8 @@ def check_prime(n: int) -> bool:
 
 def minOperations(n: int) -> int:
     """ Count number of minimum operations """
+    if n <= 0:
+        return 0
     sum_prime_factors = []
     i = 2
     while n != 1:
