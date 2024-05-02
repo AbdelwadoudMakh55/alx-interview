@@ -38,23 +38,24 @@ def handler(signum, frame):
     print(output)
 
 
-signal.signal(signal.SIGINT, handler)
-size_files = 0
-stat_code = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
-i = 0
-for line in sys.stdin:
-    output = ""
-    if check_format(line):
-        i += 1
-        size, status_code = extract_size_file_st_code(line)
-        size_files += size
-        stat_code[status_code] += 1
-    output += f'File size: {size_files}\n'
-    if i % 10 == 0:
-        print(f'File size: {size_files}')
-        for key, value in stat_code.items():
+if __name__ == '__main__':
+    signal.signal(signal.SIGINT, handler)
+    size_files = 0
+    status = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+    i = 0
+    for line in sys.stdin:
+        output = ""
+        if check_format(line):
+            i += 1
+            size, status_code = extract_size_file_st_code(line)
+            size_files += size
+            status[status_code] += 1
+        output += f'File size: {size_files}\n'
+        if i % 10 == 0:
+            print(f'File size: {size_files}')
+            for key, value in status.items():
+                if value != 0:
+                    print(f'{key}: {value}')
+        for key, value in status.items():
             if value != 0:
-                print(f'{key}: {value}')
-    for key, value in stat_code.items():
-        if value != 0:
-            output += f'{key}: {value}\n'
+                output += f'{key}: {value}\n'
