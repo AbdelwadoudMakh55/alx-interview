@@ -14,7 +14,7 @@ def check_format(line: str) -> bool:
     file_size = r'\b(?:0|[1-9]\d*)\b'
     regex = f'{ip_adress} - [{date}] "GET /projects/260 HTTP/1.1"\
  {status_code} {file_size}$'
-    if re.match(regex, line):
+    if re.search(regex, line):
         return True
     return False
 
