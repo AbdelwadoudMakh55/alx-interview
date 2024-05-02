@@ -51,6 +51,7 @@ if __name__ == '__main__':
                         print(f'{key}: {value}')
     except KeyboardInterrupt:
         raise
+    finally:
         print(f'File size: {size_files}')
         for key, value in status.items():
             if value != 0:
