@@ -8,7 +8,7 @@ from typing import Tuple
 
 
 def check_format(line: str) -> bool:
-    ip_adress = r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
+    ip_adress = r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?){4}'
     date = r'\[\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}\.\d+\]'
     status_code = '200|301|400|401|403|404|405|500'
     file_size = r'0|[1-9]\d{0,2}|102[0-4]'
