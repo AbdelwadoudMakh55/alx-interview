@@ -46,13 +46,13 @@ if __name__ == '__main__':
                 status[status_code] += 1
             if i == 10:
                 i = 0
-                sys.stdout.write(f'File size: {size_files}\n')
+                print(f'File size: {size_files}')
                 for key, value in status.items():
                     if value != 0:
-                        sys.stdout.write(f'{key}: {value}\n')
+                        print(f'{key}: {value}')
     except KeyboardInterrupt:
-        sys.stdout.write(f'File size: {size_files}\n')
+        print(f'File size: {size_files}')
         for key, value in status.items():
             if value != 0:
-                sys.stdout.write(f'{key}: {value}\n')
+                print(f'{key}: {value}')
         raise
