@@ -9,11 +9,11 @@ from typing import Tuple
 
 def check_format(line: str) -> bool:
     ip_adress = r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
-    date = r'[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+]'
+    date = r'\- \[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+\]'
     status_code = r'200|301|400|401|403|404|405|500'
     file_size = r'\b(?:0|[1-9]\d*)\b'
     request = r'GET /projects/260 HTTP/1.1'
-    regex = f'{ip_adress} - {date} {request} {status_code} {file_size}$'
+    regex = f'{ip_adress} {date} {request} {status_code} {file_size}$'
     if re.search(regex, line):
         return True
     return False
