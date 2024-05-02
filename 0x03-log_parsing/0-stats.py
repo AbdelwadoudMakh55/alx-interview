@@ -39,22 +39,20 @@ if __name__ == '__main__':
     i = 0
     try:
         for line in sys.stdin:
-            output = ""
             if check_format(line):
                 i += 1
                 size, status_code = extract_size_file_st_code(line)
                 size_files += size
                 status[status_code] += 1
-            output += f'File size: {size_files}\n'
             if i % 10 == 0:
                 print(f'File size: {size_files}')
                 for key, value in status.items():
                     if value != 0:
                         print(f'{key}: {value}')
-            for key, value in status.items():
-                if value != 0:
-                    output += f'{key}: {value}\n'
     except KeyboardInterrupt:
         pass
     finally:
-        print(output)
+        print(f'File size: {size_files}')
+        for key, value in status.items():
+            if value != 0:
+                print(f'{key}: {value}')
