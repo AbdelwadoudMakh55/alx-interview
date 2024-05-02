@@ -5,7 +5,6 @@ Parsing log from stdin
 import re
 import sys
 from typing import Tuple
-import signal
 
 
 def check_format(line: str) -> bool:
@@ -34,28 +33,28 @@ def extract_size_file_st_code(line: str) -> Tuple[int, int]:
     return int(size[::-1]), int(status_code[::-1])
 
 
-def handler(signum, frame):
-    print(output)
-
-
 if __name__ == '__main__':
     size_files = 0
     status = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
     i = 0
-    for line in sys.stdin:
-        output = ""
-        if check_format(line):
-            i += 1
-            size, status_code = extract_size_file_st_code(line)
-            size_files += size
-            status[status_code] += 1
-        output += f'File size: {size_files}\n'
-        if i % 10 == 0:
-            print(f'File size: {size_files}')
+    try:
+        for line in sys.stdin:
+            output = ""
+            if check_format(line):
+                i += 1
+                size, status_code = extract_size_file_st_code(line)
+                size_files += size
+                status[status_code] += 1
+            output += f'File size: {size_files}\n'
+            if i % 10 == 0:
+                print(f'File size: {size_files}')
+                for key, value in status.items():
+                    if value != 0:
+                        print(f'{key}: {value}')
             for key, value in status.items():
                 if value != 0:
-                    print(f'{key}: {value}')
-        for key, value in status.items():
-            if value != 0:
-                output += f'{key}: {value}\n'
-    signal.signal(signal.SIGINT, handler)
+                    output += f'{key}: {value}\n'
+    except KeyboardInterrupt:
+        pass
+    finally:
+        print(output)
