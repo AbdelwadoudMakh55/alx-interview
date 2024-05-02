@@ -43,14 +43,16 @@ try:
             size, status_code = extract_size_file_st_code(line)
             size_files += size
             status[status_code] += 1
-        if i % 10 == 0:
+        if i == 10:
+            i = 0
             print(f'File size: {size_files}')
             for key, value in status.items():
                 if value != 0:
                     print(f'{key}: {value}')
-except KeyboardInterrupt as e:
+except KeyboardInterrupt:
+    pass
+finally:
     print(f'File size: {size_files}')
     for key, value in status.items():
         if value != 0:
             print(f'{key}: {value}')
-    print(e)
