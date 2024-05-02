@@ -39,7 +39,6 @@ def handler(signum, frame):
 
 
 if __name__ == '__main__':
-    signal.signal(signal.SIGINT, handler)
     size_files = 0
     status = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
     i = 0
@@ -59,3 +58,4 @@ if __name__ == '__main__':
         for key, value in status.items():
             if value != 0:
                 output += f'{key}: {value}\n'
+    signal.signal(signal.SIGINT, handler)
