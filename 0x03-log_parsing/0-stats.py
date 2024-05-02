@@ -48,10 +48,9 @@ try:
             for key, value in status.items():
                 if value != 0:
                     print(f'{key}: {value}')
-except KeyboardInterrupt:
-    pass
-finally:
+except KeyboardInterrupt as e:
     print(f'File size: {size_files}')
     for key, value in status.items():
         if value != 0:
             print(f'{key}: {value}')
+    print(e)
