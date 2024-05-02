@@ -2,13 +2,22 @@
 """
 Parsing log from stdin
 """
+import re
 import sys
 from typing import Tuple
 import signal
 
 
 def check_format(line: str) -> bool:
-    return True
+    ip_adress = r'^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}'
+    date = r'\d{4}\-\d{2}\-\d{2} \d{2}:\d{2}:\d{2}\.\d+'
+    status_code = '200|301|400|401|403|404|405|500'
+    file_size = r'\b(?:0|[1-9]\d*)\b'
+    regex = f'{ip_adress} - [{date}] "GET /projects/260 HTTP/1.1"\
+ {status_code} {file_size}$'
+    if re.search(regex, line):
+        return True
+    return False
 
 
 def extract_size_file_st_code(line: str) -> Tuple[int, int]:
@@ -26,7 +35,7 @@ def extract_size_file_st_code(line: str) -> Tuple[int, int]:
 
 
 def handler(signum, frame):
-    print(output, end="")
+    print(output)
 
 
 signal.signal(signal.SIGINT, handler)
