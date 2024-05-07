@@ -32,6 +32,7 @@ def validUTF8(data: List[int]) -> bool:
                 if (data[j] & (1 << i)) == 0:
                     j += 1
                     result = check_subsequent_bytes(data, j, 1)
+                    j += 1
                     if not result:
                         return False
                 elif (data[j] & (1 << i)) != 0:
@@ -39,6 +40,7 @@ def validUTF8(data: List[int]) -> bool:
                     if (data[j] & (1 << i)) == 0:
                         j += 1
                         result = check_subsequent_bytes(data, j, 2)
+                        j += 2
                         if not result:
                             return False
                     elif (data[j] & (1 << i)) != 0:
@@ -46,6 +48,7 @@ def validUTF8(data: List[int]) -> bool:
                         if (data[j] & (1 << i)) == 0:
                             j += 1
                             result = check_subsequent_bytes(data, j, 3)
+                            j += 3
                             if not result:
                                 return False
                         else:
