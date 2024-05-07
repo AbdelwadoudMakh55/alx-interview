@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """
-Solution for utf-8 validatio problem
+Solution for utf-8 validation problem
 """
-
-
 from typing import List
 
 
