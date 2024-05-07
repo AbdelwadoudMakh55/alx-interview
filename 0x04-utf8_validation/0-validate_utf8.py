@@ -4,7 +4,11 @@ Solution for utf-8 validatio problem
 """
 
 
-def check_subsequent_bytes(data, j, sub):
+from typing import List
+
+
+def check_subsequent_bytes(data: List[int], j: int, sub: int) -> bool:
+    """ Check the subsequent bytes """
     i = 0
     while i < sub and j < len(data):
         if not ((data[j] & (1 << 7)) != 0 and (data[j] & (1 << 6)) == 0):
@@ -16,7 +20,8 @@ def check_subsequent_bytes(data, j, sub):
     return True
 
 
-def validUTF8(data):
+def validUTF8(data: List[int]) -> bool:
+    """ Validate UTF-8 encoding """
     j = 0
     while j < len(data):
         i = 7
