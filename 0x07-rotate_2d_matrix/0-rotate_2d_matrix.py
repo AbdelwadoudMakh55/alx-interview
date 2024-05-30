@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Rotate a 2D Matrix by 90 degrees clockwise
 """
