@@ -6,6 +6,8 @@ Implement a solution for making change problem
 
 def makeChange(coins, total):
     """Function for the solution"""
+    if total <= 0:
+        return -1
     coins.sort()
     dp = [total + 1] * (total + 1)
     dp[0] = 0
