@@ -6,7 +6,7 @@ Solve the prime game problem
 
 def primes(numbers):
     """Check for prime number inside a list"""
-    primes = []
+    primes = 0
     for i in range(1, len(numbers)):
         j = 2
         check = 0
@@ -15,7 +15,7 @@ def primes(numbers):
                 check = 1
             j += 1
         if check == 0:
-            primes.append(numbers[i])
+            primes += 1
     return primes
 
 
@@ -25,14 +25,12 @@ def isWinner(x, nums):
     ben_wins = 0
     for i in range(x):
         numbers = list(range(1, nums[i] + 1))
-        prime_nums = primes(numbers)
-        turn = 1
-        while len(prime_nums) > 0:
-            prime_nums.pop(0)
-            turn += 1
-        if turn % 2 == 1:
+        primes_count = primes(numbers)
+        if primes_count == 0:
             ben_wins += 1
-        else:
+        elif x % primes_count == 1:
+            ben_wins += 1
+        elif x % primes_count == 0:
             maria_wins += 1
     if maria_wins > ben_wins:
         return 'Maria'
