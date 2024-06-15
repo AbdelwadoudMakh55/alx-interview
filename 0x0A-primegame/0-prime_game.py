@@ -27,16 +27,13 @@ def isWinner(x, nums):
         numbers = list(range(1, nums[i] + 1))
         prime_nums = primes(numbers)
         turn = 1
-        if len(prime_nums) == 0:
-            continue
+        while len(prime_nums) > 0:
+            prime_nums.pop(0)
+            turn += 1
+        if turn % 2 == 1:
+            ben_wins += 1
         else:
-            while len(prime_nums) > 0:
-                prime_nums.pop(0)
-                turn += 1
-            if turn % 2 == 1:
-                ben_wins += 1
-            else:
-                maria_wins += 1
+            maria_wins += 1
     if maria_wins > ben_wins:
         return 'Maria'
     elif maria_wins == ben_wins:
