@@ -10,7 +10,7 @@ def primes(numbers):
     for i in range(len(numbers)):
         j = 2
         check = 0
-        while j < numbers[i]:
+        while j < int(numbers[i]**0.5) + 1:
             if numbers[i] % j == 0:
                 check = 1
                 break
