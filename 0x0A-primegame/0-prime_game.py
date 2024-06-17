@@ -21,6 +21,10 @@ def primes(numbers):
 
 def isWinner(x, nums):
     """Solution function"""
+    if x == 0 or len(nums) == 0:
+        return None
+    if x > len(nums) or len(nums) > x:
+        return None
     maria_wins = 0
     ben_wins = 0
     for i in range(x):
