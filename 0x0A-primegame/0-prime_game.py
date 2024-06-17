@@ -13,6 +13,7 @@ def primes(numbers):
         while j < numbers[i]:
             if numbers[i] % j == 0:
                 check = 1
+                break
             j += 1
         if check == 0:
             primes += 1
@@ -30,14 +31,10 @@ def isWinner(x, nums):
     for i in range(x):
         numbers = list(range(1, nums[i] + 1))
         primes_count = primes(numbers)
-        if primes_count == 0:
-            ben_wins += 1
-        elif primes_count % 2 == 1:
+        if primes_count % 2 == 1:
             maria_wins += 1
         elif primes_count % 2 == 0:
             ben_wins += 1
     if maria_wins > ben_wins:
         return 'Maria'
-    elif maria_wins == ben_wins:
-        return None
     return 'Ben'
