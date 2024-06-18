@@ -4,18 +4,18 @@ Solve the prime game problem
 """
 
 
-def primes(numbers):
-    """Check for prime number inside a list"""
+def SieveOfEratosthenes(n):
+    """Count number of prime nums up to n"""
+    prime = [True for i in range(n+1)]
+    p = 2
     primes = 0
-    for i in range(len(numbers)):
-        j = 2
-        check = 0
-        while j < int(numbers[i]**0.5) + 1:
-            if numbers[i] % j == 0:
-                check = 1
-                break
-            j += 1
-        if check == 0:
+    while (p * p <= n):
+        if prime[p]:
+            for i in range(p * p, n+1, p):
+                prime[i] = False
+        p += 1
+    for p in range(2, n+1):
+        if prime[p]:
             primes += 1
     return primes
 
@@ -29,8 +29,7 @@ def isWinner(x, nums):
     maria_wins = 0
     ben_wins = 0
     for i in range(x):
-        numbers = list(range(2, nums[i] + 1))
-        primes_count = primes(numbers)
+        primes_count = SieveOfEratosthenes(nums[i])
         if primes_count % 2 == 1:
             maria_wins += 1
         else:
